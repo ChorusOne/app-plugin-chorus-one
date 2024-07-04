@@ -119,10 +119,6 @@ def test_eigenlayer_decrease_delegated_shares(ledger_utils):
 
 
 def test_eigenlayer_complete_queued_withdrawal_more_than_one_element(ledger_utils):
-    if ledger_utils.firmware.device.startswith("stax"):
-        # This test is failing in stax when we try to show
-        # 8 screens or more: see https://github.com/LedgerHQ/app-plugin-boilerplate/issues/152
-        return
     withdrawal = (
         bytes.fromhex("0102030000000000000000000000000000040506"),
         bytes.fromhex("07080900000000000000000000000000000a0b0c"),
@@ -156,7 +152,9 @@ def test_eigenlayer_complete_queued_withdrawal_more_than_one_element(ledger_util
 
 
 def test_eigenlayer_complete_queued_withdrawal(ledger_utils):
-    if ledger_utils.firmware.device.startswith("stax"):
+    if ledger_utils.firmware.device.startswith(
+        "stax"
+    ) or ledger_utils.firmware.device.startswith("flex"):
         # This test is failing in stax when we try to show
         # 8 screens or more: see https://github.com/LedgerHQ/app-plugin-boilerplate/issues/152
         return
